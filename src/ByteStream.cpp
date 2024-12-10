@@ -37,6 +37,7 @@ ByteStream::ByteStream(
 	auto _bytesPointer = _bytes.get();
 	bytes.swap(newBytes);
 	memcpy(bytes.get(), _bytesPointer + copyBytesOffset, newBytesSize);
+	bytesSize = newBytesSize;
 };
 // unsigned long bytesRemainingSize = _bytesSize - (bytesActualSize + copyBytesOffset);
 // if (bytesRemainingSize)
