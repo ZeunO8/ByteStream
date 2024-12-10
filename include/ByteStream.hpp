@@ -148,25 +148,39 @@ namespace bs
 	};
 /*
 */
+#define BYTE_STREAM_WRITE_VECTOR(TYPE)                                 \
+template <>                                                            \
+const unsigned long ByteStream::write(const std::vector<TYPE> &vector) \
+{                                                                      \
+	unsigned long bytesWritten = 0;                                    \
+	bytesWritten += write<const unsigned long&>(vector.size());        \
+	for (auto& value : vector)                                         \
+	{                                                                  \
+		bytesWritten += write<const double&>(value);                   \
+	}                                                                  \
+	return bytesWritten;                                               \
+}
+/*
+*/
 #define BYTE_STREAM_READ_VECTOR(TYPE)                                                                     \
 template <>                                                                                               \
 const bool ByteStream::read(std::vector<TYPE> &vector, unsigned long &bytesRead, const bool &removeBytes) \
 {                                                                                                         \
-	unsigned long _size = 0;                                                                                \
-	if (!read(_size, bytesRead, removeBytes))																															  \
-	{                                                                                                       \
-		return false;                                                                                         \
-	}                                                                                                       \
-	for (unsigned long count = 1; count <= _size; count++)                                                  \
-	{                                                                                                       \
-		TYPE value;                                                                                           \
-		if (!read(value, bytesRead, removeBytes))                                                             \
-		{                                                                                                     \
-			return false;                                                                                       \
-		}                                                                                                     \
-		vector.push_back(value);                                                                              \
-	}                                                                                                       \
-	return true;                                                                                            \
+	unsigned long _size = 0;                                                                              \
+	if (!read(_size, bytesRead, removeBytes))															  \
+	{                                                                                                     \
+		return false;                                                                                     \
+	}                                                                                                     \
+	for (unsigned long count = 1; count <= _size; count++)                                                \
+	{                                                                                                     \
+		TYPE value;                                                                                       \
+		if (!read(value, bytesRead, removeBytes))                                                         \
+		{                                                                                                 \
+			return false;                                                                                 \
+		}                                                                                                 \
+		vector.push_back(value);                                                                          \
+	}                                                                                                     \
+	return true;                                                                                          \
 }
 }
 /*

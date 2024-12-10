@@ -177,20 +177,6 @@ const unsigned long ByteStream::write(const ByteStream& byteStream)
 {
 	return write<const std::pair<std::shared_ptr<char>, unsigned long>&>({byteStream.bytes, byteStream.bytesSize});
 };
-/*
-*/
-#define BYTE_STREAM_WRITE_VECTOR(TYPE)                                 \
-template <>                                                            \
-const unsigned long ByteStream::write(const std::vector<TYPE> &vector) \
-{                                                                      \
-	unsigned long bytesWritten = 0;                                      \
-	bytesWritten += write<const unsigned long&>(vector.size());          \
-	for (auto& value : vector)                                           \
-	{                                                                    \
-		bytesWritten += write<const double&>(value);                       \
-	}                                                                    \
-	return bytesWritten;                                                 \
-}
 BYTE_STREAM_WRITE_VECTOR(float);
 BYTE_STREAM_WRITE_VECTOR(double);
 BYTE_STREAM_WRITE_VECTOR(long double);
