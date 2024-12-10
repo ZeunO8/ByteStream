@@ -166,6 +166,16 @@ const unsigned long ByteStream::write(const ByteStream& byteStream)
 {
 	return write<const std::pair<std::shared_ptr<char>, unsigned long>&>({byteStream.bytes, byteStream.bytesSize});
 };
+BYTE_STREAM_WRITE_VECTOR(char);
+BYTE_STREAM_WRITE_VECTOR(unsigned char);
+BYTE_STREAM_WRITE_VECTOR(short);
+BYTE_STREAM_WRITE_VECTOR(unsigned short);
+BYTE_STREAM_WRITE_VECTOR(int);
+BYTE_STREAM_WRITE_VECTOR(unsigned int);
+BYTE_STREAM_WRITE_VECTOR(long);
+BYTE_STREAM_WRITE_VECTOR(unsigned long);
+BYTE_STREAM_WRITE_VECTOR(long long);
+BYTE_STREAM_WRITE_VECTOR(unsigned long long);
 BYTE_STREAM_WRITE_VECTOR(float);
 BYTE_STREAM_WRITE_VECTOR(double);
 BYTE_STREAM_WRITE_VECTOR(long double);
@@ -339,6 +349,16 @@ const bool ByteStream::read(ByteStream& value, unsigned long& bytesRead, const b
 	value = {bytesPair.second, bytesPair.first};
 	return true;
 };
+BYTE_STREAM_READ_VECTOR(char);
+BYTE_STREAM_READ_VECTOR(unsigned char);
+BYTE_STREAM_READ_VECTOR(short);
+BYTE_STREAM_READ_VECTOR(unsigned short);
+BYTE_STREAM_READ_VECTOR(int);
+BYTE_STREAM_READ_VECTOR(unsigned int);
+BYTE_STREAM_READ_VECTOR(long);
+BYTE_STREAM_READ_VECTOR(unsigned long);
+BYTE_STREAM_READ_VECTOR(long long);
+BYTE_STREAM_READ_VECTOR(unsigned long long);
 BYTE_STREAM_READ_VECTOR(float);
 BYTE_STREAM_READ_VECTOR(double);
 BYTE_STREAM_READ_VECTOR(long double);
