@@ -65,17 +65,29 @@ ByteStream& ByteStream::operator=(const ByteStream& byteStream)
 void ByteStream::resize(const unsigned long& newSize, const unsigned long& oldSize)
 {
 	auto oldPointer = bytes.get();
-	char *newPointer = (char *)malloc(newSize);
-	if (newSize > oldSize)
+	char *newPointer = 0;
+	if (!newSize)
 	{
-		memcpy(newPointer, oldPointer, oldSize);
+		if (oldPointer)
+		{
+			bytes.reset();
+		}
+		goto _setNewSize;
+	}
+	if (!oldPointer)
+	{
+		newPointer = (char*)malloc(newSize);
 	}
 	else
 	{
-		memcpy(newPointer, oldPointer, newSize);
+		newPointer = (char*)realloc(oldPointer, newSize);
 	}
-	std::shared_ptr<char> newBytes(newPointer, free);
-	bytes = newBytes;
+	if (newPointer != oldPointer)
+	{
+		std::shared_ptr<char> newBytes(newPointer, free);
+		bytes = newBytes;
+	}
+_setNewSize:
 	bytesSize = newSize;
 }
 
