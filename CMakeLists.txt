@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(ByteStream VERSION 1.0.2)
+project(ByteStream VERSION 1.0.3)
 
 set(CMAKE_CXX_STANDARD 20)
 
