@@ -156,7 +156,7 @@ const unsigned long ByteStream::write(const std::vector<TYPE> &vector) \
 	bytesWritten += write<const unsigned long&>(vector.size());        \
 	for (auto& value : vector)                                         \
 	{                                                                  \
-		bytesWritten += write<const double&>(value);                   \
+		bytesWritten += write<const TYPE&>(value);                     \
 	}                                                                  \
 	return bytesWritten;                                               \
 }
