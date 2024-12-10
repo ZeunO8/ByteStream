@@ -7,10 +7,14 @@ include_directories(include)
 
 add_library(ByteStream STATIC src/ByteStream.cpp)
 
+if(WIN32)
+    set(TEST_EXT ".exe")
+endif()
+
 function(create_test TEST_NAME TEST_SOURCE)
     add_executable(${TEST_NAME} ${TEST_SOURCE})
     target_link_libraries(${TEST_NAME} ByteStream)
-    add_test(NAME ${TEST_NAME} COMMAND ${CMAKE_BINARY_DIR}/${TEST_NAME})
+    add_test(NAME ${TEST_NAME} COMMAND $<TARGET_FILE_DIR:${TEST_NAME}>/${TEST_NAME}${TEST_EXT})
 endfunction()
 
 include(CTest)
